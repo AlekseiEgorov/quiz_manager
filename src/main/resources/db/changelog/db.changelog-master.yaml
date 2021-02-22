@@ -1,0 +1,171 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - changeSet:
+      id: 1
+      author: your_liquibase_username
+      changes:
+        - createTable:
+            tableName: quiz
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_active
+                  type: boolean
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: your_liquibase_username
+      changes:
+        - createTable:
+            tableName: question
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: text
+                  type: text
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: display_order
+                  type: bigint
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: quiz_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+
+  - changeSet:
+      id: 3
+      author: your_liquibase_username
+      comment: "Create admin user"
+      changes:
+        - insert:
+            tableName: quiz
+            columns:
+              - column:
+                  name: name
+                  value: "Уровень физической подготовки"
+              - column:
+                  name: start_date
+                  value: 2020-01-08 04:05:06
+              - column:
+                  name: end_date
+                  value: 2020-03-08 04:05:06
+              - column:
+                  name: is_active
+                  value: true
+        - insert:
+            tableName: quiz
+            columns:
+              - column:
+                  name: name
+                  value: "Самый лучший язык программирования"
+              - column:
+                  name: start_date
+                  value: 2021-01-08 04:05:06
+              - column:
+                  name: end_date
+                  value: 2020-03-08 04:05:06
+              - column:
+                  name: is_active
+                  value: true
+
+        - insert:
+            tableName: question
+            columns:
+              - column:
+                  name: text
+                  value: "Сколько раз вы подтягиваетесь?"
+              - column:
+                  name: display_order
+                  value: 1
+              - column:
+                  name: quiz_id
+                  value: 1
+
+        - insert:
+            tableName: question
+            columns:
+              - column:
+                  name: text
+                  value: "Сколько раз вы отжимаетесь?"
+              - column:
+                  name: display_order
+                  value: 3
+              - column:
+                  name: quiz_id
+                  value: 1
+
+        - insert:
+            tableName: question
+            columns:
+              - column:
+                  name: text
+                  value: "Сколько раз вы присидаете?"
+              - column:
+                  name: display_order
+                  value: 2
+              - column:
+                  name: quiz_id
+                  value: 1
+
+        - insert:
+            tableName: question
+            columns:
+              - column:
+                  name: text
+                  value: "Какой лучший язык программирования на Ваш взгляд?"
+              - column:
+                  name: display_order
+                  value: 4
+              - column:
+                  name: quiz_id
+                  value: 2
+
+        - insert:
+            tableName: question
+            columns:
+              - column:
+                  name: text
+                  value: "Какой самый первый язык программирования, который вы изучили?"
+              - column:
+                  name: display_order
+                  value: 5
+              - column:
+                  name: quiz_id
+                  value: 2
