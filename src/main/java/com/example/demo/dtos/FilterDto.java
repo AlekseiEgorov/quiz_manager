@@ -6,7 +6,7 @@ public class FilterDto {
     @NotBlank
     private String name;
     @NotBlank
-    private String isActivity;
+    private String isActive;
     @NotBlank
     private String startDate;
     @NotBlank
@@ -20,12 +20,12 @@ public class FilterDto {
         this.name = name;
     }
 
-    public String getIsActivity() {
-        return isActivity;
+    public String getIsActive() {
+        return isActive;
     }
 
-    public void setIsActivity(String isActivity) {
-        this.isActivity = isActivity;
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
     }
 
     public String getStartDate() {

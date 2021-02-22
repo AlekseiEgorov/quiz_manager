@@ -32,7 +32,7 @@ public class QuizService {
                 .where(new QuizWithName(filterDto.getName()))
                 .and(new QuizWithStartDate(filterDto.getStartDate()))
                 .and(new QuizWithEndDate(filterDto.getEndDate()))
-                .and(new QuizWithActivity(filterDto.getIsActivity()));
+                .and(new QuizWithActivity(filterDto.getIsActive()));
 
         boolean isSorting = sortingDto.getSortedBy() != null && sortingDto.getOrderBy() != null;
         boolean isPagination = paginationDto.getPage() != null && paginationDto.getResultsPerPage() != null;
@@ -57,5 +57,16 @@ public class QuizService {
         }
 
         return quizRepository.findAll(specification);
+    }
+
+    public void createQuiz(Quiz quiz) {
+        quizRepository.save(quiz);
+    }
+
+    public void deleteQuiz(Long quizId) {
+        if (!quizRepository.existsById(quizId)) {
+            throw new IllegalStateException("Quiz with id " + quizId + " does not exist");
+        }
+        quizRepository.deleteById(quizId);
     }
 }

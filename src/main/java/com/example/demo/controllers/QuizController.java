@@ -5,10 +5,9 @@ import com.example.demo.dtos.PaginationDto;
 import com.example.demo.dtos.QuizDto;
 import com.example.demo.dtos.SortingDto;
 import com.example.demo.mappers.QuizMapper;
+import com.example.demo.models.Quiz;
 import com.example.demo.services.QuizService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -35,5 +34,15 @@ public class QuizController {
                 .map(QuizMapper.INSTANCE::quizToQuizDto)
                 .collect(Collectors.toList());
 
+    }
+
+//    @PostMapping
+//    public void createQuiz(QuizDto quiz) {
+//
+//    }
+
+    @DeleteMapping("{quizId}")
+    public void deleteStudent(@PathVariable("quizId") Long quizId) {
+        quizService.deleteQuiz(quizId);
     }
 }

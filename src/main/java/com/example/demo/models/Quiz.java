@@ -45,7 +45,7 @@ public class Quiz {
             nullable = false,
             columnDefinition = "boolean"
     )
-    private boolean isActive;
+    private Boolean isActive;
 
     @OneToMany(mappedBy = "quiz")
     private Set<Question> questions;
@@ -82,11 +82,11 @@ public class Quiz {
         this.endDate = endDate;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         isActive = active;
     }
 

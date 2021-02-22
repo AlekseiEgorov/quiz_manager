@@ -1,8 +1,8 @@
 databaseChangeLog:
-  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - logicalFilePath: db/changelog/db.changelog-quiz.yaml
   - changeSet:
       id: 1
-      author: your_liquibase_username
+      author: liquibase_username
       changes:
         - createTable:
             tableName: quiz
@@ -38,7 +38,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 2
-      author: your_liquibase_username
+      author: liquibase_username
       changes:
         - createTable:
             tableName: question
@@ -60,7 +60,6 @@ databaseChangeLog:
                   name: display_order
                   type: bigint
                   constraints:
-                    unique: true
                     nullable: false
               - column:
                   name: quiz_id
@@ -71,7 +70,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 3
-      author: your_liquibase_username
+      author: liquibase_username
       comment: "Create admin user"
       changes:
         - insert:
@@ -152,7 +151,7 @@ databaseChangeLog:
                   value: "Какой лучший язык программирования на Ваш взгляд?"
               - column:
                   name: display_order
-                  value: 4
+                  value: 1
               - column:
                   name: quiz_id
                   value: 2
@@ -165,7 +164,7 @@ databaseChangeLog:
                   value: "Какой самый первый язык программирования, который вы изучили?"
               - column:
                   name: display_order
-                  value: 5
+                  value: 2
               - column:
                   name: quiz_id
                   value: 2
