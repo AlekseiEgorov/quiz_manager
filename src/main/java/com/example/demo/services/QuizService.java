@@ -67,6 +67,21 @@ public class QuizService {
     }
 
     public Quiz createQuiz(Quiz quiz) {
+        if (quiz.getName() == null) {
+            throw new IllegalStateException("No name entered for quiz");
+        }
+        if (quiz.getStartDate() == null) {
+            throw new IllegalStateException("No startDate entered for quiz");
+        }
+        if (quiz.getEndDate() == null) {
+            throw new IllegalStateException("No endDate entered for quiz");
+        }
+        if (quiz.getIsActive() == null) {
+            throw new IllegalStateException("No isActive entered for quiz");
+        }
+        if (quiz.getQuestions() == null || quiz.getQuestions().isEmpty()) {
+            throw new IllegalStateException("No questions entered for quiz");
+        }
         return quizRepository.save(quiz);
     }
 
