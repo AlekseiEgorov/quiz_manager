@@ -16,6 +16,7 @@ public class SortingDto {
     public String getSortedBy() {
         return sortedBy;
     }
+
     public void setSortedBy(String sortedBy) {
         this.sortedBy = sortedBy;
     }

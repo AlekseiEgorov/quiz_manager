@@ -1,9 +1,11 @@
 package com.example.demo.services;
 
-import com.example.demo.dtos.FilterDto;
 import com.example.demo.dtos.PaginationDto;
+import com.example.demo.dtos.QuizDto;
 import com.example.demo.dtos.SortingDto;
+import com.example.demo.mappers.QuizMapper;
 import com.example.demo.models.Quiz;
+import com.example.demo.repositories.QuestionRepository;
 import com.example.demo.repositories.QuizRepository;
 import com.example.demo.specifications.QuizWithActivity;
 import com.example.demo.specifications.QuizWithEndDate;
@@ -15,24 +17,29 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class QuizService {
 
     private final QuizRepository quizRepository;
+    private final QuestionRepository questionRepository;
+    private final QuizMapper mapper;
 
-    public QuizService(QuizRepository quizRepository) {
+    public QuizService(QuizRepository quizRepository, QuestionRepository questionRepository, QuizMapper mapper) {
         this.quizRepository = quizRepository;
+        this.questionRepository = questionRepository;
+        this.mapper = mapper;
     }
 
-    public List<Quiz> getQuizzes(FilterDto filterDto, SortingDto sortingDto, PaginationDto paginationDto) {
+    public List<Quiz> getQuizzes(Quiz quizDto, SortingDto sortingDto, PaginationDto paginationDto) {
 
         Specification<Quiz> specification = Specification
-                .where(new QuizWithName(filterDto.getName()))
-                .and(new QuizWithStartDate(filterDto.getStartDate()))
-                .and(new QuizWithEndDate(filterDto.getEndDate()))
-                .and(new QuizWithActivity(filterDto.getIsActive()));
+                .where(new QuizWithName(quizDto.getName()))
+                .and(new QuizWithStartDate(quizDto.getStartDate()))
+                .and(new QuizWithEndDate(quizDto.getEndDate()))
+                .and(new QuizWithActivity(quizDto.getIsActive()));
 
         boolean isSorting = sortingDto.getSortedBy() != null && sortingDto.getOrderBy() != null;
         boolean isPagination = paginationDto.getPage() != null && paginationDto.getResultsPerPage() != null;
@@ -59,8 +66,8 @@ public class QuizService {
         return quizRepository.findAll(specification);
     }
 
-    public void createQuiz(Quiz quiz) {
-        quizRepository.save(quiz);
+    public Quiz createQuiz(Quiz quiz) {
+        return quizRepository.save(quiz);
     }
 
     public void deleteQuiz(Long quizId) {
@@ -68,5 +75,19 @@ public class QuizService {
             throw new IllegalStateException("Quiz with id " + quizId + " does not exist");
         }
         quizRepository.deleteById(quizId);
+    }
+
+    @Transactional
+    public Quiz updateQuiz(Long quizId, Quiz quizChanges) {
+        Quiz quiz = quizRepository.findById(quizId).
+                orElseThrow(() -> new IllegalStateException(
+                        "quiz with id " + quizId + " does not exist"
+                ));
+        if (!quizChanges.getQuestions().isEmpty()) {
+            questionRepository.deleteAll(quiz.getQuestions());
+        }
+        mapper.updateQuiz(quizChanges, quiz);
+
+        return quiz;
     }
 }

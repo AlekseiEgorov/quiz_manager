@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dtos.FilterDto;
 import com.example.demo.dtos.PaginationDto;
 import com.example.demo.dtos.QuizDto;
 import com.example.demo.dtos.SortingDto;
@@ -18,31 +17,42 @@ import java.util.stream.Collectors;
 public class QuizController {
 
     private final QuizService quizService;
+    private final QuizMapper mapper;
 
-    public QuizController(QuizService quizService) {
+    public QuizController(QuizService quizService, QuizMapper mapper) {
         this.quizService = quizService;
+        this.mapper = mapper;
     }
 
     @GetMapping()
     public List<QuizDto> getQuizzes(
-            @Valid FilterDto filterDto,
+            @Valid QuizDto quizDto,
             @Valid SortingDto sortingDto,
             @Valid PaginationDto paginationDto) {
 
-        return quizService.getQuizzes(filterDto, sortingDto, paginationDto)
+        return quizService.getQuizzes(mapper.toEntity(quizDto), sortingDto, paginationDto)
                 .stream()
-                .map(QuizMapper.INSTANCE::quizToQuizDto)
+                .map(mapper::toDto)
                 .collect(Collectors.toList());
-
     }
 
-//    @PostMapping
-//    public void createQuiz(QuizDto quiz) {
-//
-//    }
+    @PostMapping
+    public QuizDto createQuiz(@Valid QuizDto quizDto) {
+        Quiz quiz = quizService.createQuiz(mapper.toEntity(quizDto));
+        return mapper.toDto(quiz);
+    }
+
+    @PutMapping("{quizId}")
+    public QuizDto updateQuiz(
+            @Valid QuizDto quizDto,
+            @PathVariable("quizId") Long quizId) {
+
+        Quiz quiz = quizService.updateQuiz(quizId, mapper.toEntity(quizDto));
+        return mapper.toDto(quiz);
+    }
 
     @DeleteMapping("{quizId}")
-    public void deleteStudent(@PathVariable("quizId") Long quizId) {
+    public void deleteQuiz(@PathVariable("quizId") Long quizId) {
         quizService.deleteQuiz(quizId);
     }
 }

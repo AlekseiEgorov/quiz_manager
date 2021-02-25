@@ -1,13 +1,20 @@
 package com.example.demo.dtos;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 public class QuizDto {
+    @NotBlank
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String startDate;
+    @NotBlank
     private String endDate;
-    private boolean isActive;
+    @NotBlank
+    private String isActive;
+    @NotBlank
     private Set<String> questions;
 
     public Long getId() {
@@ -42,12 +49,12 @@ public class QuizDto {
         this.endDate = endDate;
     }
 
-    public boolean isActive() {
+    public String getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
     }
 
     public Set<String> getQuestions() {

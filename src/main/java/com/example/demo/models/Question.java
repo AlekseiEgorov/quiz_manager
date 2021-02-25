@@ -8,37 +8,27 @@ import java.time.LocalDateTime;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(
-            name = "id",
-            nullable = false
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(
-            name = "text",
-            nullable = false,
-            columnDefinition = "text",
-            unique = true
-    )
+    @Column(name = "text")
     private String text;
 
-    @Column(
-            name = "display_order",
-            nullable = false,
-            columnDefinition = "bigint",
-            unique = true
-    )
+    @Column(name = "display_order")
     private Long displayOrder;
 
     @ManyToOne()
-    @JoinColumn(
-            name = "quiz_id", //Название отображаемое в базе данных
-            nullable = false,
-            referencedColumnName = "id", //Название первичного ключа другой таблицы.
-            foreignKey = @ForeignKey(
-                    name = "quiz_question_fk")) // Название внешнего ключа
+    @JoinColumn(name = "quiz_id")
     private Quiz quiz;
+
+    public Question(String text, Long displayOrder) {
+        this.text = text;
+        this.displayOrder = displayOrder;
+    }
+
+    public Question() {
+    }
 
     public Long getId() {
         return id;
@@ -71,4 +61,6 @@ public class Question {
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
     }
+
+
 }

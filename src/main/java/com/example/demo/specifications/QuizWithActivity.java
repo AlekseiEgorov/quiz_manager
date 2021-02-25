@@ -9,18 +9,17 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class QuizWithActivity implements Specification<Quiz> {
-    private Boolean isActivity;
+    private Boolean isActive;
 
-    public QuizWithActivity(String isActivityStr) {
-        this.isActivity = "true".equalsIgnoreCase(isActivityStr) ? Boolean.TRUE :
-                "false".equalsIgnoreCase(isActivityStr) ? Boolean.FALSE : null;
+    public QuizWithActivity(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     @Override
     public Predicate toPredicate(Root<Quiz> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        if (isActivity == null) {
+        if (isActive == null) {
             return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
         }
-        return criteriaBuilder.equal(root.get("isActivity"), isActivity);
+        return criteriaBuilder.equal(root.get("isActive"), isActive);
     }
 }

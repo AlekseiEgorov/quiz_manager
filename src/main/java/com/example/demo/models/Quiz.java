@@ -11,43 +11,23 @@ import java.util.TreeSet;
 public class Quiz {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(
-            name = "id",
-            nullable = false
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(
-            name = "name",
-            nullable = false,
-            columnDefinition = "text",
-            unique = true
-    )
+    @Column(name = "name")
     private String name;
 
-    @Column(
-            name = "start_date",
-            nullable = false,
-            columnDefinition = "timestamp"
-    )
+    @Column(name = "start_date")
     private LocalDateTime startDate;
 
-    @Column(
-            name = "end_date",
-            nullable = false,
-            columnDefinition = "timestamp"
-    )
+    @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    @Column(
-            name = "is_active",
-            nullable = false,
-            columnDefinition = "boolean"
-    )
+    @Column(name = "is_active")
     private Boolean isActive;
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private Set<Question> questions;
 
     public Long getId() {
@@ -82,11 +62,11 @@ public class Quiz {
         this.endDate = endDate;
     }
 
-    public Boolean isActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public void setIsActive(Boolean active) {
         isActive = active;
     }
 
@@ -95,10 +75,7 @@ public class Quiz {
     }
 
     public void setQuestions(Set<Question> questions) {
-        Set<Question> sortedSet = new TreeSet<Question>((firstQuestion, secondQuestion) ->
-                firstQuestion.getDisplayOrder().compareTo(firstQuestion.getDisplayOrder()));
-        sortedSet.addAll(questions);
-        this.questions = sortedSet;
+        this.questions = questions;
     }
 
 }

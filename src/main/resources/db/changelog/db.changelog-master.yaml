@@ -54,7 +54,6 @@ databaseChangeLog:
                   name: text
                   type: text
                   constraints:
-                    unique: true
                     nullable: false
               - column:
                   name: display_order

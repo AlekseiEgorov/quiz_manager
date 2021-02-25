@@ -8,27 +8,23 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Locale;
 
 public class QuizWithEndDate implements Specification<Quiz> {
-    private String input;
+    private LocalDateTime endDate;
 
-    public QuizWithEndDate(String input) {
-        this.input = input;
+    public QuizWithEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     @Override
     public Predicate toPredicate(Root<Quiz> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        if (input == null || input.isEmpty()) {
+        if (endDate == null) {
             return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm",  Locale.US);
-        LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
-        LocalDateTime one = dateTime.truncatedTo(ChronoUnit.MINUTES);
-        LocalDateTime two = dateTime.plusMinutes(1).truncatedTo(ChronoUnit.MINUTES);
+        LocalDateTime one = endDate.truncatedTo(ChronoUnit.MINUTES);
+        LocalDateTime two = endDate.plusMinutes(1).truncatedTo(ChronoUnit.MINUTES);
 
-        return criteriaBuilder.between(root.get("startDate"), one, two);
+        return criteriaBuilder.between(root.get("endDate"), one, two);
     }
 }
