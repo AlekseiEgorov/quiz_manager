@@ -7,10 +7,7 @@ import com.example.demo.mappers.QuizMapper;
 import com.example.demo.models.Quiz;
 import com.example.demo.repositories.QuestionRepository;
 import com.example.demo.repositories.QuizRepository;
-import com.example.demo.specifications.QuizWithActivity;
-import com.example.demo.specifications.QuizWithEndDate;
-import com.example.demo.specifications.QuizWithName;
-import com.example.demo.specifications.QuizWithStartDate;
+import com.example.demo.specifications.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -39,7 +36,8 @@ public class QuizService {
                 .where(new QuizWithName(quizDto.getName()))
                 .and(new QuizWithStartDate(quizDto.getStartDate()))
                 .and(new QuizWithEndDate(quizDto.getEndDate()))
-                .and(new QuizWithActivity(quizDto.getIsActive()));
+                .and(new QuizWithActivity(quizDto.getIsActive()))
+                .and(new QuizWithId(quizDto.getId()));
 
         boolean isSorting = sortingDto.getSortedBy() != null && sortingDto.getOrderBy() != null;
         boolean isPagination = paginationDto.getPage() != null && paginationDto.getResultsPerPage() != null;
