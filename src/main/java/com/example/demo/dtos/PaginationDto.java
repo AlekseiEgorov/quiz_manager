@@ -11,8 +11,8 @@ public class PaginationDto {
     @ApiModelProperty(
             notes = "Number of page",
             name = "page",
-            value = "Number of page",
-            example = "1")
+            value = "Number of page. Begin with 0",
+            example = "0")
     @NotBlank
     private Integer page;
 
