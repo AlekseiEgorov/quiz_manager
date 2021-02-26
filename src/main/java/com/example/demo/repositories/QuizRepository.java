@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QuizRepository extends JpaRepository<Quiz, Long>, JpaSpecificationExecutor<Quiz> {
     Page<Quiz> findAll(Specification specification, Pageable pageable);
+    boolean existsByName(String name);
 }

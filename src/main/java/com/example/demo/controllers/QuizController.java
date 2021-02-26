@@ -41,7 +41,7 @@ public class QuizController {
 
     @ApiOperation(value = "Create quiz")
     @PostMapping
-    public QuizDto createQuiz(@Valid QuizDto quizDto) {
+    public QuizDto createQuiz(@RequestBody QuizDto quizDto) {
         Quiz quiz = quizService.createQuiz(mapper.toEntity(quizDto));
         return mapper.toDto(quiz);
     }
@@ -49,7 +49,7 @@ public class QuizController {
     @ApiOperation(value = "Update quiz")
     @PutMapping("{quizId}")
     public QuizDto updateQuiz(
-            @Valid QuizDto quizDto,
+            @RequestBody QuizDto quizDto,
             @PathVariable("quizId") Long quizId) {
 
         Quiz quiz = quizService.updateQuiz(quizId, mapper.toEntity(quizDto));

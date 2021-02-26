@@ -65,6 +65,11 @@ public class QuizService {
     }
 
     public Quiz createQuiz(Quiz quiz) {
+
+        if (quizRepository.existsByName(quiz.getName())) {
+            throw new IllegalStateException("Quiz with such name already exists");
+        }
+
         if (quiz.getName() == null) {
             throw new IllegalStateException("No name entered for quiz");
         }
