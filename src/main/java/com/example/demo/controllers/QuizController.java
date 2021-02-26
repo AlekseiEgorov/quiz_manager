@@ -6,12 +6,14 @@ import com.example.demo.dtos.SortingDto;
 import com.example.demo.mappers.QuizMapper;
 import com.example.demo.models.Quiz;
 import com.example.demo.services.QuizService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ApiOperation(value = "quizzes", tags = "Quiz Controller")
 @RestController
 @RequestMapping("quizzes")
 public class QuizController {
@@ -24,6 +26,7 @@ public class QuizController {
         this.mapper = mapper;
     }
 
+    @ApiOperation(value = "Get sorted and paginated quizzes by filter")
     @GetMapping()
     public List<QuizDto> getQuizzes(
             @Valid QuizDto quizDto,
@@ -36,12 +39,14 @@ public class QuizController {
                 .collect(Collectors.toList());
     }
 
+    @ApiOperation(value = "Create quiz")
     @PostMapping
     public QuizDto createQuiz(@Valid QuizDto quizDto) {
         Quiz quiz = quizService.createQuiz(mapper.toEntity(quizDto));
         return mapper.toDto(quiz);
     }
 
+    @ApiOperation(value = "Update quiz")
     @PutMapping("{quizId}")
     public QuizDto updateQuiz(
             @Valid QuizDto quizDto,
@@ -51,6 +56,7 @@ public class QuizController {
         return mapper.toDto(quiz);
     }
 
+    @ApiOperation(value = "Delete quiz")
     @DeleteMapping("{quizId}")
     public void deleteQuiz(@PathVariable("quizId") Long quizId) {
         quizService.deleteQuiz(quizId);

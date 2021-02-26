@@ -1,15 +1,30 @@
 package com.example.demo.dtos;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.domain.Sort;
 
 import javax.validation.constraints.NotBlank;
 
+@ApiModel(description = "SortingDto Model")
 public class SortingDto {
 
+    @ApiModelProperty(
+            notes = "Name of the field by which sorting",
+            name = "sortedBy",
+            value = "Name of the field by which sorting",
+            example = "startDate",
+            allowableValues = "id, name, startDate, endDate")
     @NotBlank
     private String sortedBy;
+
+    @ApiModelProperty(
+            notes = "Sorting order",
+            name = "orderBy",
+            value = "Sorting order",
+            example = "ASC",
+            allowableValues = "ASC, DESC")
     @NotBlank
     private Sort.Direction orderBy;
 
