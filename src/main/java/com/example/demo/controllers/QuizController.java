@@ -65,7 +65,6 @@ public class QuizController {
         quizService.deleteQuiz(quizId);
     }
 
-
     @ExceptionHandler(ApiRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handleApiRequestException(

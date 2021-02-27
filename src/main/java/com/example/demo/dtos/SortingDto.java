@@ -14,7 +14,6 @@ public class SortingDto {
             notes = "Name of the field by which sorting",
             name = "sortedBy",
             value = "Name of the field by which sorting",
-            example = "startDate",
             allowableValues = "id, name, startDate, endDate")
     @NotBlank
     private String sortedBy;
@@ -23,7 +22,6 @@ public class SortingDto {
             notes = "Sorting order",
             name = "orderBy",
             value = "Sorting order",
-            example = "ASC",
             allowableValues = "ASC, DESC")
     @NotBlank
     private Sort.Direction orderBy;

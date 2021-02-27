@@ -2,9 +2,7 @@ package com.example.demo.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "quiz")

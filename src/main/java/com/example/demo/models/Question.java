@@ -1,7 +1,6 @@
 package com.example.demo.models;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "question")

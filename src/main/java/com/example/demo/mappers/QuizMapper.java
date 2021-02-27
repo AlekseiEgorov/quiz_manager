@@ -3,12 +3,8 @@ package com.example.demo.mappers;
 import com.example.demo.dtos.QuizDto;
 import com.example.demo.models.Question;
 import com.example.demo.models.Quiz;
-import com.example.demo.repositories.QuestionRepository;
 import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,8 +30,11 @@ public interface QuizMapper {
                 "false".equalsIgnoreCase(isActive) ? Boolean.FALSE : null;
     }
 
-    default Set<String> mapFromQuestions(Set<Question> date) {
-        return date.stream()
+    default Set<String> mapFromQuestions(Set<Question> questions) {
+        if (questions == null) {
+            return null;
+        }
+        return questions.stream()
                 .sorted((firstQuestion, secondQuestion) ->
                         firstQuestion.getDisplayOrder().compareTo(firstQuestion.getDisplayOrder()))
                 .map(Question::getText)
@@ -44,7 +43,7 @@ public interface QuizMapper {
 
     default Set<Question> mapToQuestions(Set<String> texts) {
         if (texts == null) {
-            return Collections.EMPTY_SET;
+            return null;
         }
         Set<Question> question = new LinkedHashSet<>();
         long displayOrder = 1;
@@ -59,8 +58,10 @@ public interface QuizMapper {
 
     @AfterMapping
     default void after(@MappingTarget Quiz quiz) {
-        for (Question question : quiz.getQuestions()) {
-            question.setQuiz(quiz);
+        if (quiz.getQuestions() != null) {
+            for (Question question : quiz.getQuestions()) {
+                question.setQuiz(quiz);
+            }
         }
     }
 

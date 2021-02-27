@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import com.example.demo.dtos.PaginationDto;
-import com.example.demo.dtos.QuizDto;
 import com.example.demo.dtos.SortingDto;
 import com.example.demo.exceptions.ApiRequestException;
 import com.example.demo.mappers.QuizMapper;
@@ -71,7 +70,7 @@ public class QuizService {
             throw new ApiRequestException("Quiz with such name already exists");
         }
 
-        if (quiz.getName() == null) {
+        if (quiz.getName() == null || quiz.getName().isEmpty()) {
             throw new ApiRequestException("No name entered for quiz");
         }
         if (quiz.getStartDate() == null) {
@@ -102,7 +101,7 @@ public class QuizService {
                 orElseThrow(() -> new ApiRequestException(
                         "quiz with id " + quizId + " does not exist"
                 ));
-        if (!quizChanges.getQuestions().isEmpty()) {
+        if (quizChanges.getQuestions() != null) {
             questionRepository.deleteAll(quiz.getQuestions());
         }
         mapper.updateQuiz(quizChanges, quiz);

@@ -11,16 +11,14 @@ public class PaginationDto {
     @ApiModelProperty(
             notes = "Number of page",
             name = "page",
-            value = "Number of page. Begin with 0",
-            example = "0")
+            value = "Number of page. Begin with 0")
     @NotBlank
     private Integer page;
 
     @ApiModelProperty(
             notes = "Number of results per page",
             name = "resultsPerPage",
-            value = "Number of results per page",
-            example = "2")
+            value = "Number of results per page")
     @NotBlank
     private Integer resultsPerPage;
 
