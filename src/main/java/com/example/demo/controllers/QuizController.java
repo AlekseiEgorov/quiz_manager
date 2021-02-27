@@ -3,10 +3,13 @@ package com.example.demo.controllers;
 import com.example.demo.dtos.PaginationDto;
 import com.example.demo.dtos.QuizDto;
 import com.example.demo.dtos.SortingDto;
+import com.example.demo.exceptions.ApiRequestException;
 import com.example.demo.mappers.QuizMapper;
 import com.example.demo.models.Quiz;
 import com.example.demo.services.QuizService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -60,5 +63,16 @@ public class QuizController {
     @DeleteMapping("{quizId}")
     public void deleteQuiz(@PathVariable("quizId") Long quizId) {
         quizService.deleteQuiz(quizId);
+    }
+
+
+    @ExceptionHandler(ApiRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleApiRequestException(
+            ApiRequestException exception
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(exception.getMessage());
     }
 }

@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.dtos.PaginationDto;
 import com.example.demo.dtos.QuizDto;
 import com.example.demo.dtos.SortingDto;
+import com.example.demo.exceptions.ApiRequestException;
 import com.example.demo.mappers.QuizMapper;
 import com.example.demo.models.Quiz;
 import com.example.demo.repositories.QuestionRepository;
@@ -67,30 +68,30 @@ public class QuizService {
     public Quiz createQuiz(Quiz quiz) {
 
         if (quizRepository.existsByName(quiz.getName())) {
-            throw new IllegalStateException("Quiz with such name already exists");
+            throw new ApiRequestException("Quiz with such name already exists");
         }
 
         if (quiz.getName() == null) {
-            throw new IllegalStateException("No name entered for quiz");
+            throw new ApiRequestException("No name entered for quiz");
         }
         if (quiz.getStartDate() == null) {
-            throw new IllegalStateException("No startDate entered for quiz");
+            throw new ApiRequestException("No startDate entered for quiz");
         }
         if (quiz.getEndDate() == null) {
-            throw new IllegalStateException("No endDate entered for quiz");
+            throw new ApiRequestException("No endDate entered for quiz");
         }
         if (quiz.getIsActive() == null) {
-            throw new IllegalStateException("No isActive entered for quiz");
+            throw new ApiRequestException("No isActive entered for quiz");
         }
         if (quiz.getQuestions() == null || quiz.getQuestions().isEmpty()) {
-            throw new IllegalStateException("No questions entered for quiz");
+            throw new ApiRequestException("No questions entered for quiz");
         }
         return quizRepository.save(quiz);
     }
 
     public void deleteQuiz(Long quizId) {
         if (!quizRepository.existsById(quizId)) {
-            throw new IllegalStateException("Quiz with id " + quizId + " does not exist");
+            throw new ApiRequestException("Quiz with id " + quizId + " does not exist");
         }
         quizRepository.deleteById(quizId);
     }
@@ -98,7 +99,7 @@ public class QuizService {
     @Transactional
     public Quiz updateQuiz(Long quizId, Quiz quizChanges) {
         Quiz quiz = quizRepository.findById(quizId).
-                orElseThrow(() -> new IllegalStateException(
+                orElseThrow(() -> new ApiRequestException(
                         "quiz with id " + quizId + " does not exist"
                 ));
         if (!quizChanges.getQuestions().isEmpty()) {
