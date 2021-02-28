@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,5 +74,18 @@ public class QuizController {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(exception.getMessage());
+    }
+
+    @ExceptionHandler(DateTimeParseException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleDateTimeParseException(
+            DateTimeParseException exception
+    ) {
+        String enteredText = exception.getMessage().split("'")[1];
+        String formatErrorText = "Entered text '%s' does not match format yyyy-MM-dd HH:mm:ss";
+        String errorText = String.format(formatErrorText, enteredText);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(errorText);
     }
 }

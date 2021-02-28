@@ -22,14 +22,16 @@ public class QuizDto {
     @ApiModelProperty(
             notes = "Start date of the quiz",
             name = "startDate",
-            value = "Format: yyyy-MM-dd HH:mm:ss")
+            value = "Format: yyyy-MM-dd HH:mm:ss",
+            example = "2020-03-08 04:05:06")
     @NotBlank
     private String startDate;
 
     @ApiModelProperty(
             notes = "End date of the quiz",
             name = "endDate",
-            value = "Format: yyyy-MM-dd HH:mm:ss")
+            value = "Format: yyyy-MM-dd HH:mm:ss",
+            example = "2020-05-08 04:05:06")
     @NotBlank
     private String endDate;
 
@@ -37,6 +39,7 @@ public class QuizDto {
             notes = "Is the quiz active?",
             name = "isActive",
             value = "true or false",
+            example = "true",
             allowableValues = "true, false")
     @NotBlank
     private String isActive;
