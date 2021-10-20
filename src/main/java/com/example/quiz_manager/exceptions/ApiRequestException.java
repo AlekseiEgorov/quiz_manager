@@ -1,4 +1,4 @@
-package com.example.demo.exceptions;
+package com.example.quiz_manager.exceptions;
 
 public class ApiRequestException extends RuntimeException{
 

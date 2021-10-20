@@ -1,12 +1,14 @@
-package com.example.demo.dtos;
+package com.example.quiz_manager.dtos;
 
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 import org.springframework.data.domain.Sort;
 
 import javax.validation.constraints.NotBlank;
 
+@Data
 @ApiModel(description = "SortingDto Model")
 public class SortingDto {
 
@@ -23,20 +25,8 @@ public class SortingDto {
             name = "orderBy",
             value = "Sorting order",
             allowableValues = "ASC, DESC")
-    @NotBlank
+    @Setter(AccessLevel.NONE)
     private Sort.Direction orderBy;
-
-    public String getSortedBy() {
-        return sortedBy;
-    }
-
-    public void setSortedBy(String sortedBy) {
-        this.sortedBy = sortedBy;
-    }
-
-    public Sort.Direction getOrderBy() {
-        return orderBy;
-    }
 
     public void setOrderBy(String orderBy) {
        this.orderBy = Sort.Direction.fromString(orderBy);

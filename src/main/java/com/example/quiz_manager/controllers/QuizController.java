@@ -1,12 +1,13 @@
-package com.example.demo.controllers;
+package com.example.quiz_manager.controllers;
 
-import com.example.demo.dtos.PaginationDto;
-import com.example.demo.dtos.QuizDto;
-import com.example.demo.dtos.SortingDto;
-import com.example.demo.exceptions.ApiRequestException;
-import com.example.demo.mappers.QuizMapper;
-import com.example.demo.models.Quiz;
-import com.example.demo.services.QuizService;
+import com.example.quiz_manager.dtos.PaginationDto;
+import com.example.quiz_manager.dtos.QuizAddUpdateDto;
+import com.example.quiz_manager.dtos.QuizDto;
+import com.example.quiz_manager.dtos.SortingDto;
+import com.example.quiz_manager.exceptions.ApiRequestException;
+import com.example.quiz_manager.mappers.QuizMapper;
+import com.example.quiz_manager.models.Quiz;
+import com.example.quiz_manager.services.QuizService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,18 +46,18 @@ public class QuizController {
 
     @ApiOperation(value = "Create quiz")
     @PostMapping
-    public QuizDto createQuiz(@RequestBody QuizDto quizDto) {
-        Quiz quiz = quizService.createQuiz(mapper.toEntity(quizDto));
+    public QuizDto createQuiz(@RequestBody QuizAddUpdateDto quizAddUpdateDto) {
+        Quiz quiz = quizService.createQuiz(mapper.toEntity(quizAddUpdateDto));
         return mapper.toDto(quiz);
     }
 
     @ApiOperation(value = "Update quiz")
     @PutMapping("{quizId}")
     public QuizDto updateQuiz(
-            @RequestBody QuizDto quizDto,
+            @RequestBody QuizAddUpdateDto quizAddUpdateDto,
             @PathVariable("quizId") Long quizId) {
 
-        Quiz quiz = quizService.updateQuiz(quizId, mapper.toEntity(quizDto));
+        Quiz quiz = quizService.updateQuiz(quizId, mapper.toEntity(quizAddUpdateDto));
         return mapper.toDto(quiz);
     }
 

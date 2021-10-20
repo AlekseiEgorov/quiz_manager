@@ -1,7 +1,7 @@
-package com.example.demo.config;
+package com.example.quiz_manager.config;
 
-import com.example.demo.dtos.PaginationDto;
-import com.example.demo.dtos.SortingDto;
+import com.example.quiz_manager.dtos.PaginationDto;
+import com.example.quiz_manager.dtos.SortingDto;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +29,7 @@ public class SpringFoxConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.demo"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.quiz_manager"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())

@@ -1,10 +1,14 @@
-package com.example.demo.dtos;
+package com.example.quiz_manager.dtos;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
+@Data
 @ApiModel(description = "PaginationDto Model")
 public class PaginationDto {
 
@@ -22,19 +26,4 @@ public class PaginationDto {
     @NotBlank
     private Integer resultsPerPage;
 
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getResultsPerPage() {
-        return resultsPerPage;
-    }
-
-    public void setResultsPerPage(Integer resultsPerPage) {
-        this.resultsPerPage = resultsPerPage;
-    }
 }

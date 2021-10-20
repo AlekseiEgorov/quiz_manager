@@ -1,8 +1,9 @@
-package com.example.demo.mappers;
+package com.example.quiz_manager.mappers;
 
-import com.example.demo.dtos.QuizDto;
-import com.example.demo.models.Question;
-import com.example.demo.models.Quiz;
+import com.example.quiz_manager.dtos.QuizAddUpdateDto;
+import com.example.quiz_manager.dtos.QuizDto;
+import com.example.quiz_manager.models.Question;
+import com.example.quiz_manager.models.Quiz;
 import org.mapstruct.*;
 
 import java.util.LinkedHashSet;
@@ -18,7 +19,11 @@ public interface QuizMapper {
 
     @Mapping(target = "startDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
     @Mapping(target = "endDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
-    Quiz toEntity(QuizDto quizDto);
+    Quiz toEntity(QuizDto quizDTO);
+
+    @Mapping(target = "startDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Mapping(target = "endDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    Quiz toEntity(QuizAddUpdateDto quizAddUpdateDto);
 
     default String map(Boolean isActive) {
         String result = isActive.toString();

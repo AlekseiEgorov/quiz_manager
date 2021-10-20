@@ -1,6 +1,6 @@
-package com.example.demo.specifications;
+package com.example.quiz_manager.specifications;
 
-import com.example.demo.models.Quiz;
+import com.example.quiz_manager.models.Quiz;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

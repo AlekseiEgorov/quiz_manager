@@ -1,13 +1,13 @@
-package com.example.demo.services;
+package com.example.quiz_manager.services;
 
-import com.example.demo.dtos.PaginationDto;
-import com.example.demo.dtos.SortingDto;
-import com.example.demo.exceptions.ApiRequestException;
-import com.example.demo.mappers.QuizMapper;
-import com.example.demo.models.Quiz;
-import com.example.demo.repositories.QuestionRepository;
-import com.example.demo.repositories.QuizRepository;
-import com.example.demo.specifications.*;
+import com.example.quiz_manager.dtos.PaginationDto;
+import com.example.quiz_manager.dtos.SortingDto;
+import com.example.quiz_manager.exceptions.ApiRequestException;
+import com.example.quiz_manager.mappers.QuizMapper;
+import com.example.quiz_manager.models.Quiz;
+import com.example.quiz_manager.repositories.QuestionRepository;
+import com.example.quiz_manager.repositories.QuizRepository;
+import com.example.quiz_manager.specifications.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

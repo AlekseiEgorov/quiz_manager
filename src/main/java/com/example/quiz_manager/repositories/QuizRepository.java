@@ -1,6 +1,6 @@
-package com.example.demo.repositories;
+package com.example.quiz_manager.repositories;
 
-import com.example.demo.models.Quiz;
+import com.example.quiz_manager.models.Quiz;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
