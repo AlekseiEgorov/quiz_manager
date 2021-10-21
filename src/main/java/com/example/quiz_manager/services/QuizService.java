@@ -8,6 +8,7 @@ import com.example.quiz_manager.models.Quiz;
 import com.example.quiz_manager.repositories.QuestionRepository;
 import com.example.quiz_manager.repositories.QuizRepository;
 import com.example.quiz_manager.specifications.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,18 +18,13 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class QuizService {
 
     private final QuizRepository quizRepository;
     private final QuestionRepository questionRepository;
     private final QuizMapper mapper;
-
-    public QuizService(QuizRepository quizRepository, QuestionRepository questionRepository, QuizMapper mapper) {
-        this.quizRepository = quizRepository;
-        this.questionRepository = questionRepository;
-        this.mapper = mapper;
-    }
 
     public List<Quiz> getQuizzes(Quiz quizDto, SortingDto sortingDto, PaginationDto paginationDto) {
 

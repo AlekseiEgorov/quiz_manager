@@ -9,6 +9,7 @@ import com.example.quiz_manager.mappers.QuizMapper;
 import com.example.quiz_manager.models.Quiz;
 import com.example.quiz_manager.services.QuizService;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +20,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApiOperation(value = "quizzes", tags = "Quiz Controller")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("quizzes")
 public class QuizController {
 
     private final QuizService quizService;
     private final QuizMapper mapper;
-
-    public QuizController(QuizService quizService, QuizMapper mapper) {
-        this.quizService = quizService;
-        this.mapper = mapper;
-    }
 
     @ApiOperation(value = "Get sorted and paginated quizzes by filter")
     @GetMapping()
