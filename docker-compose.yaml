@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    container_name: quiz-manager
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+    links:
+      - db
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres

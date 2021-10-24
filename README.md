@@ -35,22 +35,11 @@ REST-сервис должен предоставлять следующие м�
 ## <h2>Инструкция по запуску
          
 Для запуска приложение необходимо сделать следующее:
-1. Настройте application.properties, задав собственное название базы данных, а также username и password
- 
-        spring.datasource.url=jdbc:postgresql://localhost:5432/{yourDataBaseName}
-        spring.datasource.username={yourUserName}
-        spring.datasource.password={yourPassword}
-        spring.jpa.hibernate.ddl-auto=none
-        #Показывает запросы sql в консоле
-        spring.jpa.show-sql=true
-        spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-        #Форматирует запросы sql в читабельный вид в консоле
-        spring.jpa.properties.hibernate.format_sql=true
-        spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml
-        server.error.include-message=always
-2. Для сборки проекта введите в терминале команду ./gradlew build
-3. Для запуска проекта введите в терминале команду ./gradlew bootRun
+1. Установите Docker Compose, если не установлен
+2. Зайдите в папку проекта quiz_manager
+3. Для запуска программы введите в терминале ./gradlew startApp
 4. Для получения документации перейдите на http://localhost:8080/swagger-ui.html
+5. Для остановки программы введите в терминале ./gradlew stopApp
 
 
 
